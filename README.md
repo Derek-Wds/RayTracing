@@ -1,0 +1,1 @@
+* Download `imagemagick` before converting and displaying the images.
