@@ -32,7 +32,7 @@ vector<Sphere> SetUpScene() {
         Sphere(Vec3(1e12 + 100, 0, 0), 1e12, PURPLE, new Metal(Vec3(1, 1, 1), 0.8)),
         Sphere(Vec3(0, 0, -1e12 - 50), 1e12, PURPLE, new Metal(Vec3(1, 1, 1), 0.8)),
         Sphere(Vec3(0, 0, 1e12 + 50), 1e12, PURPLE, new Metal(Vec3(1, 1, 1), 0.8)), 
-        Sphere(Vec3(-6.5 + 50, 6, -2), 6, SILVER, new Metal(Vec3(1, 1, 1), 0.2)),
+        Sphere(Vec3(-6.5 + 50, 6, -2), 6, SILVER, new Metal(Vec3(1, 1, 1), 0.05)),
         Sphere(Vec3(4.5 + 50, 4, -2), 4, BLUE, new Lambertian(new ConstantTexture(BLUE))),
         Sphere(Vec3(50, 3, 5), 3, WHITE, new Dielectric(1.5)),
         Sphere(Vec3(50, 2, 11), 2, WHITE, new Lambertian(earth)),
