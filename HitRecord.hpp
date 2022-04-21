@@ -4,7 +4,9 @@
 #include "Ray.hpp"
 #include "Vec3.hpp"
 
-struct HitRecord {
+// HitRecord class.
+struct HitRecord
+{
     float t;
     double u;
     double v;

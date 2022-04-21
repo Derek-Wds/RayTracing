@@ -3,18 +3,22 @@
 
 #include "Vec3.hpp"
 
-class Ray {
-    public:
-        Vec3 orig;
-        Vec3 dir;
-        Ray() = default;
-        Ray(const Vec3& origin, const Vec3& direction)
-            : orig(origin), dir(direction)
-        {}
+// Ray class.
+class Ray
+{
+public:
+    Vec3 orig;
+    Vec3 dir;
+    Ray() = default;
+    Ray(const Vec3 &origin, const Vec3 &direction)
+        : orig(origin), dir(direction)
+    {
+    }
 
-        Vec3 at(double t) const {
-            return orig + t * dir;
-        }
+    Vec3 at(double t) const
+    {
+        return orig + t * dir;
+    }
 };
 
 #endif
