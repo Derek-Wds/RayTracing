@@ -2,6 +2,7 @@
 A simple ray tracing project in c++. Many thanks to the wonder books written by Peter Shirley: [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html) and [Ray Tracing: The Next Week](https://raytracing.github.io/books/RayTracingTheNextWeek.html).
 
 ## Demo
+It takes several hours to render the figrue below.
 ![Demo](output.png)
 
 ## How to run the codes.

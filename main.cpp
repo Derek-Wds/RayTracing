@@ -33,7 +33,7 @@ vector<Sphere> SetUpScene()
     vector<Sphere> spheres = {
         Sphere(Vec3(50, -1e12, 0), 1e12, GRAY, new Lambertian(new CheckerTexture(new ConstantTexture(GRAY), new ConstantTexture(BLACK)))),
         Sphere(Vec3(50, 1e12 + 25, 0), 1e12, WHITEGRAY, NULL),
-        Sphere(Vec3(-1e12 - 0.5, 0, 0), 1e12, PURPLE, new Metal(Vec3(1, 1, 1), 0.8)),
+        Sphere(Vec3(-1e12, 0, 0), 1e12, PURPLE, new Metal(Vec3(1, 1, 1), 0.8)),
         Sphere(Vec3(1e12 + 100, 0, 0), 1e12, PURPLE, new Metal(Vec3(1, 1, 1), 0.8)),
         Sphere(Vec3(0, 0, -1e12 - 50), 1e12, PURPLE, new Metal(Vec3(1, 1, 1), 0.8)),
         Sphere(Vec3(0, 0, 1e12 + 50), 1e12, PURPLE, new Metal(Vec3(1, 1, 1), 0.8)),
@@ -66,13 +66,13 @@ vector<Sphere> SetUpScene()
         Vec3 location(x, r, z);
         Vec3 color(RandDouble(), RandDouble(), RandDouble());
         double rand = RandDouble();
-        if (rand < 0.6)
+        if (rand < 0.45)
         {
             spheres.push_back(Sphere(location, r, color, new Lambertian(new ConstantTexture(color))));
         }
-        else if (rand < 0.8)
+        else if (rand < 0.75)
         {
-            spheres.push_back(Sphere(location, r, color, new Metal(Vec3(1, 1, 1), 1)));
+            spheres.push_back(Sphere(location, r, color, new Metal(Vec3(1, 1, 1), 0.1)));
         }
         else
         {
@@ -90,38 +90,38 @@ Vec3 RayColor(const Ray &ray, const vector<Sphere> &spheres, int depth)
         return Vec3();
 
     // Check if the ray intersects with any spheres.
-    bool isHit = false;
-    double t = INFINITY;
-    Sphere s;
-    HitRecord r;
-    for (Sphere cur : spheres)
+    bool hit = false;
+    double temp = INFINITY;
+    Sphere sphere;
+    HitRecord rec;
+    for (Sphere sph : spheres)
     {
-        HitRecord rec;
-        bool hit = cur.hit(ray, rec, 0.001, t);
-        if (rec.t > 0.0 && hit)
+        HitRecord r;
+        bool h = sph.hit(ray, r, 0.001, temp);
+        if (r.t > 0.0 && h)
         {
-            isHit = true;
-            if (rec.t < t)
+            hit = true;
+            if (r.t < temp)
             {
-                t = rec.t;
-                s = cur;
-                r = rec;
+                sphere = sph;
+                temp = r.t;
+                rec = r;
             }
         }
     }
 
     // If hit, return the color scattered from the sphere.
-    if (isHit)
+    if (hit)
     {
         Ray scattered;
         Vec3 attenuation;
-        if (s.material == NULL)
-            return s.color;
+        if (sphere.material == NULL)
+            return sphere.color;
         else
         {
-            if (s.material->scatter(ray, r, scattered, attenuation))
+            if (sphere.material->scatter(ray, rec, scattered, attenuation))
             {
-                return attenuation * s.color * RayColor(scattered, spheres, depth - 1);
+                return attenuation * sphere.color * RayColor(scattered, spheres, depth - 1);
             }
             else
             {
@@ -131,9 +131,9 @@ Vec3 RayColor(const Ray &ray, const vector<Sphere> &spheres, int depth)
     }
 
     // If not hit, return background color.
-    Vec3 unit = normalize(ray.dir);
-    t = 0.5 * ((unit.y) + 1.0);
-    return t * Vec3(0, 0, 0);
+    Vec3 unitvec = normalize(ray.dir);
+    temp = 0.5 * ((unitvec.y) + 1.0);
+    return temp * Vec3(0, 0, 0);
 };
 
 // Main function.
@@ -185,7 +185,7 @@ int main()
     for (int i = 0; i < width * height; i++)
     {
         fprintf(f, "%d %d %d ", (int)(255.999 * output[i].x),
-                (int)(255.999 * output[i].y), (int)(255.999 * output[i].z));
+            (int)(255.999 * output[i].y), (int)(255.999 * output[i].z));
     }
     std::cout << "\nDone." << std::endl;
 
