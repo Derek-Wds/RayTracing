@@ -1,4 +1,6 @@
 # Ray Tracing
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A simple ray tracing project in c++. Many thanks to the wonder books written by Peter Shirley: [Ray Tracing in One Weekend](https://raytracing.github.io/books/RayTracingInOneWeekend.html) and [Ray Tracing: The Next Week](https://raytracing.github.io/books/RayTracingTheNextWeek.html).
 
 ## Demo
